@@ -30,7 +30,7 @@ module Pivotal
     end
 
     def self.create(opts)
-      Reqest.post('stories', opts)
+      Request.post('stories', opts)
     end
 
   end
