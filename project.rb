@@ -1,4 +1,4 @@
-require 'story'
+require 'pivotal/story'
 
 module Pivotal
   class Project

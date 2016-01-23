@@ -6,7 +6,7 @@ module Pivotal
   module Request
     TOKEN = ENV['PIVOTAL_TOKEN']
     def self.base_url
-      project = ENV['PIVOTAL_PROJECT_ID'] || 1487596
+      project = ENV['PIVOTAL_PROJECT_ID']
       "https://www.pivotaltracker.com/services/v5/projects/#{project}"
     end
 
@@ -24,7 +24,6 @@ module Pivotal
 
       res = Net::HTTP.start(uri.host, uri.port, use_ssl: true) do |http|
         http.verify_mode = OpenSSL::SSL::VERIFY_NONE
-        http.ssl_version = :SSLv3
         http.request req
       end
 

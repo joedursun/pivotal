@@ -1,4 +1,4 @@
-require 'request'
+require 'pivotal/request'
 
 module Pivotal
   class Label

@@ -1,5 +1,5 @@
-require 'label'
-require 'request'
+require 'pivotal/label'
+require 'pivotal/request'
 
 module Pivotal
   class Story
@@ -21,7 +21,7 @@ module Pivotal
     def add_label(name)
       params = {name: name}
       endpoint = "stories/#{id}/labels"
-      Request.post('stories', params)
+      Request.post(endpoint, params)
     end
 
     def self.where(filters={})
