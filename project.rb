@@ -12,8 +12,7 @@ module Pivotal
 
       end
 
-      def add_release_label_to_stories(label_name)
-        stories = get_delivered_and_unreleased_stories
+      def add_release_label_to_stories(label_name, stories)
         stories.each do |story|
           story.add_label(label_name)
         end
@@ -26,8 +25,7 @@ module Pivotal
 
       def delivered_unreleased_stories
         filters = { after_story_id: last_release_id, with_state: :accepted }
-        stories = Story.where(filters)
-        stories.select {|s| s.story_type != 'release'}
+        Story.where(filters).select {|s| s.story_type != 'release'}
       end
     end
 

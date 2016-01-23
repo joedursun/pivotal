@@ -1,10 +1,11 @@
 require 'net/http'
-require 'uri'
+require 'open-uri'
 require 'json'
 
 module Pivotal
   module Request
     TOKEN = ENV['PIVOTAL_TOKEN']
+
     def self.base_url
       project = ENV['PIVOTAL_PROJECT_ID']
       "https://www.pivotaltracker.com/services/v5/projects/#{project}"
@@ -20,6 +21,7 @@ module Pivotal
       uri = URI(base_url + '/' + endpoint)
       req = Net::HTTP::Post.new uri
       req.add_field('X-TrackerToken', TOKEN)
+      req.add_field('Content-Type', 'application/json')
       req.body = params.to_json
 
       res = Net::HTTP.start(uri.host, uri.port, use_ssl: true) do |http|
