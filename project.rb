@@ -5,7 +5,8 @@ module Pivotal
 
     class << self
       def create_new_release_marker(name)
-        Story.create('release', name)
+        opts = { name: name, accepted_at: Time.now.utc.iso8601, story_type: 'release' }
+        Story.create(opts)
       end
 
       def move_stories_above_release_marker

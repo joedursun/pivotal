@@ -19,7 +19,7 @@ module Pivotal
     end
 
     def add_label(name)
-      params = {name: name}
+      params = { name: name }
       endpoint = "stories/#{id}/labels"
       Request.post(endpoint, params)
     end
@@ -29,8 +29,8 @@ module Pivotal
       stories.map {|s| self.new(s)}
     end
 
-    def self.create(story_type, name)
-
+    def self.create(opts)
+      Reqest.post('stories', opts)
     end
 
   end
