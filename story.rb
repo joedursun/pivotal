@@ -5,7 +5,7 @@ module Pivotal
   class Story
 
     attr_reader :created_at, :updated_at, :accepted_at, :story_type, :name, :current_state, :url,
-                :owner_ids, :project_id, :owned_by_id, :kind
+                :owner_ids, :project_id, :owned_by_id, :kind, :id
 
     def initialize(opts={})
       opts.each_pair do |attribute, value|
@@ -20,6 +20,7 @@ module Pivotal
 
     def add_label(name)
       params = {name: name}
+      endpoint = "stories/#{id}/labels"
       Request.post('stories', params)
     end
 

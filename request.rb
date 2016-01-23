@@ -1,8 +1,10 @@
+require 'net/http'
 require 'uri'
 require 'json'
 
 module Pivotal
   module Request
+    TOKEN = ENV['PIVOTAL_TOKEN']
     def self.base_url
       project = ENV['PIVOTAL_PROJECT_ID'] || 1487596
       "https://www.pivotaltracker.com/services/v5/projects/#{project}"
@@ -11,11 +13,22 @@ module Pivotal
     def self.get(endpoint, params={})
       url = base_url + '/' + endpoint
       url += '?' + URI.encode_www_form(params) unless params.empty?
-      JSON.parse(open(url, {'X-TrackerToken' => ENV['PIVOTAL_TOKEN']}) {|f| f.read})
+      JSON.parse(open(url, {'X-TrackerToken' => TOKEN}) {|f| f.read})
     end
 
-    def self.post(url, params)
-      # FIXME
+    def self.post(endpoint, params)
+      uri = URI(base_url + '/' + endpoint)
+      req = Net::HTTP::Post.new uri
+      req.add_field('X-TrackerToken', TOKEN)
+      req.body = params.to_json
+
+      res = Net::HTTP.start(uri.host, uri.port, use_ssl: true) do |http|
+        http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+        http.ssl_version = :SSLv3
+        http.request req
+      end
+
+      JSON.parse(res.body)
     end
   end
 end

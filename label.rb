@@ -13,9 +13,5 @@ module Pivotal
     def self.create(opts)
       Request.post('labels', opts)
     end
-
-    def self.add_to_stories(label_id, story_ids)
-      # FIXME
-    end
   end
 end
