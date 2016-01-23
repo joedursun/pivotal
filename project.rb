@@ -4,16 +4,23 @@ module Pivotal
   class Project
 
     class << self
-      def create_new_release_marker(name)
-        opts = { name: name, accepted_at: Time.now.utc.iso8601, story_type: 'release' }
+      def update_for_release(release_label)
+        stories = delivered_unreleased_stories
+        add_release_label_to_stories(stories, release_label)
+        after_id = stories.sort_by(&:accepted_at).last.id
+
+        marker_name = release_label.capitalize.gsub('_', ' ')
+        create_new_release_marker(marker_name, after_id)
+      end
+
+      def create_new_release_marker(name, after_id=nil)
+        opts = { name: name, accepted_at: Time.now.utc.iso8601, story_type: 'release', after_id: after_id }
+        opts.delete_if {|k,v| v.nil?}
+
         Story.create(opts)
       end
 
-      def move_stories_above_release_marker
-
-      end
-
-      def add_release_label_to_stories(label_name, stories)
+      def add_release_label_to_stories(stories, label_name)
         stories.each do |story|
           story.add_label(label_name)
         end
