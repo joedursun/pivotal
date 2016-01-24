@@ -4,7 +4,9 @@ This pivotal gem is designed to work with v5 of Pivotal Tracker's API. There are
 so you'll never have to worry about conflicts.
 
 Before you get started, you'll need to set a couple of environment variables:
+
 `export PIVOTAL_TOKEN="YOUR API TOKEN GOES HERE"`
+
 `export PIVOTAL_PROJECT_ID="PIVOTAL PROJECT ID GOES HERE"`
 
 ## Usage
