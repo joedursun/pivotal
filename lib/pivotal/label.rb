@@ -5,7 +5,7 @@ module Pivotal
     attr_reader :id, :project_id, :name, :created_at, :updated_at
 
     def self.endpoint
-      'stories'
+      'labels'
     end
 
   end
