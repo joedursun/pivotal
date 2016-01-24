@@ -3,8 +3,12 @@ require 'pivotal/request'
 module Pivotal
   class API
 
-    def endpoint
+    def self.endpoint
       raise 'You must define an endpoint in the child class.'
+    end
+
+    def endpoint
+      self.class.endpoint
     end
 
     def initialize(opts={})
@@ -13,9 +17,9 @@ module Pivotal
       end
     end
 
-    def self.where(endpoint, filters={})
-      stories = Request.get(endpoint, filters) || []
-      stories.map {|s| self.new(s)}
+    def self.where(filters={})
+      objects = Request.get(endpoint, filters) || []
+      objects.map {|s| self.new(s)}
     end
 
     def self.create(opts)

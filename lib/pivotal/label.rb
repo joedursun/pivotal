@@ -4,7 +4,7 @@ module Pivotal
   class Label < API
     attr_reader :id, :project_id, :name, :created_at, :updated_at
 
-    def endpoint
+    def self.endpoint
       'stories'
     end
 

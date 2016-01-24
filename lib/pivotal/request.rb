@@ -9,6 +9,7 @@ module Pivotal
     PROJECT = ENV['PIVOTAL_PROJECT_ID']
 
     def self.base_url
+      raise 'You must set the PIVOTAL_PROJECT_ID environment variable' if PROJECT.nil?
       "https://www.pivotaltracker.com/services/v5/projects/#{PROJECT}"
     end
 
@@ -20,17 +21,22 @@ module Pivotal
 
     def self.post(endpoint, params)
       uri = URI(base_url + '/' + endpoint)
+      request = create_post_request(uri, params)
+
+      res = Net::HTTP.start(uri.host, uri.port, use_ssl: true) do |http|
+        http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+        http.request request
+      end
+
+      JSON.parse(res.body)
+    end
+
+    def self.create_post_request(uri, params)
       req = Net::HTTP::Post.new uri
       req.add_field('X-TrackerToken', TOKEN)
       req.add_field('Content-Type', 'application/json')
       req.body = params.to_json
-
-      res = Net::HTTP.start(uri.host, uri.port, use_ssl: true) do |http|
-        http.verify_mode = OpenSSL::SSL::VERIFY_NONE
-        http.request req
-      end
-
-      JSON.parse(res.body)
+      req
     end
   end
 end

@@ -19,7 +19,7 @@ module Pivotal
       Request.post(endpoint, params)
     end
 
-    def endpoint
+    def self.endpoint
       'stories'
     end
 
