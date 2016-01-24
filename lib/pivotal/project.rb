@@ -8,6 +8,7 @@ module Pivotal
         stories = delivered_unreleased_stories
         if stories.empty?
           puts 'No stories found'
+          return
         end
 
         add_release_label_to_stories(stories, release_label)
@@ -28,8 +29,10 @@ module Pivotal
         end
       end
 
-      def last_release_id
-        date = Time.at(2.weeks.ago).utc.iso8601
+      def last_release_id(days_since_last_release=nil)
+        days_since_last_release ||= 14
+        two_weeks_ago = Time.now - 60*60*24*days_since_last_release
+        date = Time.at(two_weeks_ago).utc.iso8601
         filters = {with_state: :accepted, with_story_type: :release, accepted_after: date}
         Story.where(filters).sort_by(&:accepted_at).last.id
       end
