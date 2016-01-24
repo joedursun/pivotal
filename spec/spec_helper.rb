@@ -1,0 +1,6 @@
+require 'rspec'
+require 'pivotal/api'
+require 'pivotal/request'
+require 'pivotal/label'
+require 'pivotal/story'
+require 'pivotal/project'
