@@ -1,14 +1,15 @@
 require 'net/http'
 require 'open-uri'
 require 'json'
+require 'pivotal/errors'
 
 module Pivotal
   module Request
     TOKEN = ENV['PIVOTAL_TOKEN']
+    PROJECT = ENV['PIVOTAL_PROJECT_ID']
 
     def self.base_url
-      project = ENV['PIVOTAL_PROJECT_ID']
-      "https://www.pivotaltracker.com/services/v5/projects/#{project}"
+      "https://www.pivotaltracker.com/services/v5/projects/#{PROJECT}"
     end
 
     def self.get(endpoint, params={})

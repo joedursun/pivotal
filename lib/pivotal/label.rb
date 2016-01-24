@@ -1,17 +1,12 @@
-require 'pivotal/request'
+require 'pivotal/api'
 
 module Pivotal
-  class Label
+  class Label < API
     attr_reader :id, :project_id, :name, :created_at, :updated_at
 
-    def initialize(opts={})
-      opts.each_pair do |attribute, value|
-        self.instance_variable_set("@#{attribute}", value)
-      end
+    def endpoint
+      'stories'
     end
 
-    def self.create(opts)
-      Request.post('labels', opts)
-    end
   end
 end

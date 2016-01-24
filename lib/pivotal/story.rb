@@ -1,17 +1,12 @@
+require 'pivotal/api'
 require 'pivotal/label'
 require 'pivotal/request'
 
 module Pivotal
-  class Story
+  class Story < API
 
     attr_reader :created_at, :updated_at, :accepted_at, :story_type, :name, :current_state, :url,
                 :owner_ids, :project_id, :owned_by_id, :kind, :id
-
-    def initialize(opts={})
-      opts.each_pair do |attribute, value|
-        self.instance_variable_set("@#{attribute}", value)
-      end
-    end
 
     def labels
       return [] if @labels.nil?
@@ -24,13 +19,8 @@ module Pivotal
       Request.post(endpoint, params)
     end
 
-    def self.where(filters={})
-      stories = Request.get('stories', filters) || []
-      stories.map {|s| self.new(s)}
-    end
-
-    def self.create(opts)
-      Request.post('stories', opts)
+    def endpoint
+      'stories'
     end
 
   end
