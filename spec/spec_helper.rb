@@ -1,9 +1,5 @@
 require 'rspec'
-require 'pivotal/api'
-require 'pivotal/request'
-require 'pivotal/label'
-require 'pivotal/story'
-require 'pivotal/project'
+require 'pivotal'
 
 RSpec.configure do |c|
   c.before(:example) { stub_const("Pivotal::Request::TOKEN", 'abcdefgh123456789zyxwvut') }
