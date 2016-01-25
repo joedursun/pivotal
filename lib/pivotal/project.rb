@@ -1,45 +1,31 @@
 require 'pivotal/story'
 
 module Pivotal
-  class Project
+  class Project < API
 
     class << self
       def update_for_release(release_label)
-        stories = delivered_unreleased_stories
+        stories = accepted_unreleased_stories
         if stories.empty?
           puts 'No stories found'
           return
         end
 
-        add_release_label_to_stories(stories, release_label)
-        after_id = stories.sort_by(&:accepted_at).last.id
-
-        marker_name = release_label.capitalize.gsub('_', ' ')
-        create_new_release_marker(marker_name)
+        release = Release.new(name: release_label, stories: stories)
+        release.add_label_to_stories
+        release.create_new_marker
       end
 
-      def create_new_release_marker(name)
-        opts = { name: name, current_state: :accepted, story_type: 'release'}
-        Story.create(opts)
-      end
+      def accepted_unreleased_stories
+        most_recent = Release.most_recent
+        return [] if most_recent.nil?
 
-      def add_release_label_to_stories(stories, label_name)
-        stories.each do |story|
-          story.add_label(label_name)
-        end
-      end
-
-      def last_release_id(days_since_last_release=nil)
-        days_since_last_release ||= 14
-        two_weeks_ago = Time.now - 60*60*24*days_since_last_release
-        date = Time.at(two_weeks_ago).utc.iso8601
-        filters = {with_state: :accepted, with_story_type: :release, accepted_after: date}
-        Story.where(filters).sort_by(&:accepted_at).last.id
-      end
-
-      def delivered_unreleased_stories
-        filters = { after_story_id: last_release_id, with_state: :accepted }
+        filters = { after_story_id: most_recent.id, with_state: :accepted }
         Story.where(filters).select {|s| s.story_type != 'release'}
+      end
+
+      def endpoint
+        '' # Request.base_url includes the project id so nothing to add here
       end
     end
 
