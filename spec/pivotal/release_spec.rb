@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe Pivotal::Release do
   let(:story){ double('Story1', add_label: true) }
-  let(:release){ described_class.new(name: 'Epic new release', stories: [story]) }
+  let(:release){ described_class.new(label: 'Epic new release', stories: [story]) }
 
   describe '#create_new_marker' do
     it 'creates a new release story with the given name' do
@@ -22,8 +22,8 @@ describe Pivotal::Release do
 
   describe '#marker_name' do
     it 'is the capitalized name without underscores' do
-      release = described_class.new(name: 'hot_fix 01/01/2020', stories: [story])
-      expect(release.marker_name).to eq 'Hot fix 01/01/2020'
+      release = described_class.new(label: 'hot_fix', stories: [story])
+      expect(release.marker_name).to eq 'Hot fix'
     end
   end
 

@@ -2,10 +2,10 @@ require 'pivotal/story'
 
 module Pivotal
   class Release < Story
-    attr_reader :stories
+    attr_reader :stories, :label
 
     def marker_name
-      name.capitalize.gsub('_', ' ')
+      label.capitalize.gsub('_', ' ')
     end
 
     def create_new_marker
@@ -13,9 +13,10 @@ module Pivotal
       self.class.create(opts)
     end
 
-    def add_label_to_stories
+    def add_label_to_stories(label=nil)
+      label ||= name
       stories.each do |story|
-        story.add_label(name)
+        story.add_label(label)
       end
     end
 

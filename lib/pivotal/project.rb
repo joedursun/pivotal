@@ -11,7 +11,7 @@ module Pivotal
           return
         end
 
-        release = Release.new(name: release_label, stories: stories)
+        release = Release.new(label: release_label, stories: stories)
         release.add_label_to_stories
         release.create_new_marker
       end
