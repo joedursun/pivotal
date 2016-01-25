@@ -2,6 +2,13 @@ require 'pivotal/story'
 
 module Pivotal
   class Project < API
+    attr_reader :version, :iteration_length, :week_start_day, :point_scale, :point_scale_is_custom,
+                :bugs_and_chores_are_estimatable, :automatic_planning, :enable_tasks, :start_date,
+                :time_zone, :velocity_averaged_over, :shown_iterations_start_time, :start_time,
+                :number_of_done_iterations_to_show, :has_google_domain, :description, :profile_content,
+                :enable_incoming_emails, :initial_velocity, :project_type, :public, :atom_enabled,
+                :current_iteration_number, :current_velocity, :current_volatility, :account_id,
+                :story_ids, :epic_ids, :membership_ids, :label_ids, :integration_ids, :iteration_override_numbers
 
     class << self
       def update_for_release(release_label)

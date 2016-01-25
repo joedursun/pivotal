@@ -2,7 +2,8 @@ require 'pivotal/request'
 
 module Pivotal
   class API
-    attr_reader :error, :code, :general_problem
+    attr_reader :error, :code, :general_problem, :kind, :updated_at, :created_at, :project_id, :name,
+                :id, :accepted_at
 
     def initialize(opts={})
       opts.each_pair do |attribute, value|

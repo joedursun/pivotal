@@ -5,8 +5,7 @@ require 'pivotal/request'
 module Pivotal
   class Story < API
 
-    attr_reader :created_at, :updated_at, :accepted_at, :story_type, :name, :current_state, :url,
-                :owner_ids, :project_id, :owned_by_id, :kind, :id
+    attr_reader :story_type, :current_state, :url, :owner_ids, :owned_by_id
 
     def labels
       return [] if @labels.nil?
