@@ -15,7 +15,7 @@ describe Pivotal::Release do
 
   describe '#add_label_to_stories' do
     it 'adds a label to each of the stories' do
-      expect(story).to receive(:add_label)
+      expect(story).to receive(:add_label).with('epic_new_release')
       release.add_label_to_stories
     end
   end

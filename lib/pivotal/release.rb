@@ -13,10 +13,10 @@ module Pivotal
       self.class.create(opts)
     end
 
-    def add_label_to_stories(label=nil)
-      label ||= name
+    def add_label_to_stories(label_name=nil)
+      label_name ||= @label.gsub(' ','_').downcase
       stories.each do |story|
-        story.add_label(label)
+        story.add_label(label_name)
       end
     end
 

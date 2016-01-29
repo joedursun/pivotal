@@ -13,10 +13,7 @@ module Pivotal
     class << self
       def update_for_release(release_label)
         stories = accepted_unreleased_stories
-        if stories.empty?
-          puts 'No stories found'
-          return
-        end
+        return if stories.empty?
 
         release = Release.new(label: release_label, stories: stories)
         release.add_label_to_stories
