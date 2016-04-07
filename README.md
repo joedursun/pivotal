@@ -1,5 +1,6 @@
 ## About
 [![Build Status](https://travis-ci.org/joedursun/pivotal.png)](https://travis-ci.org/joedursun/pivotal)
+[![Code Climate](https://codeclimate.com/github/joedursun/pivotal/badges/gpa.svg)](https://codeclimate.com/github/joedursun/pivotal)
 
 This pivotal gem is designed to work with v5 of Pivotal Tracker's API. There are no external dependencies,
 so you'll never have to worry about conflicts.
