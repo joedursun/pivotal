@@ -1,7 +1,7 @@
-## About
 [![Build Status](https://travis-ci.org/joedursun/pivotal.png)](https://travis-ci.org/joedursun/pivotal)
 [![Code Climate](https://codeclimate.com/github/joedursun/pivotal/badges/gpa.svg)](https://codeclimate.com/github/joedursun/pivotal)
 
+## About
 This pivotal gem is designed to work with v5 of Pivotal Tracker's API. There are no external dependencies,
 so you'll never have to worry about conflicts.
 
@@ -16,6 +16,9 @@ Before you get started, you'll need to set a couple of environment variables:
 ## Structure:
 Several of the classes defined in Pivotal inherit from Pivotal::API. The API class defines methods like `where` and `create`
 so that any child class can support common queries. Think ActiveRecord.
+
+## Supported Ruby versions
+For the most up to date list of supported Ruby versions check the [Travis CI page](https://travis-ci.org/joedursun/pivotal)
 
 ## Usage
 
