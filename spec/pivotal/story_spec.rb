@@ -30,12 +30,12 @@ describe Pivotal::Story do
   describe '#add_label' do
     let(:label_response) do
       {
-       'created_at': '2016-01-19T12:00:00Z',
-       'id': 5100,
-       'kind': 'label',
-       'name': 'my new label',
-       'project_id': 99,
-       'updated_at': '2016-01-19T12:00:00Z'
+       created_at: '2016-01-19T12:00:00Z',
+       id: 5100,
+       kind: 'label',
+       name: 'my new label',
+       project_id: 99,
+       updated_at: '2016-01-19T12:00:00Z'
       }
     end
 
