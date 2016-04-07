@@ -1,9 +1,10 @@
 ## About
+[![Build Status](https://travis-ci.org/joedursun/pivotal.png)](https://travis-ci.org/joedursun/pivotal)
 
 This pivotal gem is designed to work with v5 of Pivotal Tracker's API. There are no external dependencies,
 so you'll never have to worry about conflicts.
 
-To see all of the supported functionality of Pivotal API v5, [check out their docs here.](http://www.pivotaltracker.com/help/api/rest/v5#top). At the moment, this gem only supports a subset of the Pivotal API. See below for some examples of what's possible now.
+To see all of the supported functionality of Pivotal API v5, [check out their docs here](http://www.pivotaltracker.com/help/api/rest/v5#top). At the moment, this gem only supports a subset of the Pivotal API. See below for some examples of what's possible now.
 
 Before you get started, you'll need to set a couple of environment variables:
 
