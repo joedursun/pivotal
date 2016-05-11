@@ -24,7 +24,7 @@ describe Pivotal::Project do
     end
 
     context 'no stories have been accepted since last release' do
-      it 'asdfasdfqwer' do
+      it 'is an empty array' do
         expect(Pivotal::Release).to receive(:most_recent).and_return(recent_release)
         expect(Pivotal::Story).to receive(:where).and_return([])
         expect(described_class.accepted_unreleased_stories).to eq []
