@@ -7,7 +7,7 @@ module Pivotal
     end
 
     def label
-      Label.new(@label) if @label
+      Label.new(@label_id) if @label_id
     end
 
   end
